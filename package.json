@@ -1,4 +1,6 @@
 {
+  "name": "snowpack-svgr",
+  "author": "Koen Poelhekke",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -15,7 +17,7 @@
     "build": "tsdx build --target node --format cjs",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "prepare": "yarn build"
   },
   "peerDependencies": {},
   "husky": {
@@ -29,8 +31,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "snowpack-svgr",
-  "author": "Koen Poelhekke",
   "devDependencies": {
     "husky": "^6.0.0",
     "tsdx": "^0.14.1",
