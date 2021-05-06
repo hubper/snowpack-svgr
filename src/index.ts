@@ -39,6 +39,7 @@ function snowpackSvgr(
       const bundle = await rollup({
         input: filePath,
         plugins,
+        external: ['react']
       });
 
       const {output} = await bundle.generate({
