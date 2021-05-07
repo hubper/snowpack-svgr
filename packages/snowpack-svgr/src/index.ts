@@ -1,8 +1,4 @@
 import { promises as fs } from 'fs';
-// @ts-expect-error
-import svgr from '@svgr/rollup';
-// @ts-expect-error
-import url from '@rollup/plugin-url';
 import { PluginLoadOptions, SnowpackConfig } from 'snowpack';
 // @ts-expect-error
 import convert from '@svgr/core';
@@ -18,7 +14,7 @@ import presetEnv from '@babel/preset-env';
 // @ts-expect-error
 import pluginTransformReactConstantElements from '@babel/plugin-transform-react-constant-elements';
 
-const babelOptions = {
+const defaultBabelOptions = {
   babelrc: false,
   configFile: false,
   presets: [
@@ -31,11 +27,16 @@ const babelOptions = {
 type SnowpackSVGROptions = {
   exportUrlAsDefault?: boolean;
   svgrOptions?: Record<string, unknown>;
+  babelOptions?: babel.TransformOptions;
 };
 
 function snowpackSvgr(
   snowpackConfig: SnowpackConfig,
-  { svgrOptions = {}, exportUrlAsDefault = false }: SnowpackSVGROptions = {}
+  {
+    exportUrlAsDefault = false,
+    svgrOptions = {},
+    babelOptions = {},
+  }: SnowpackSVGROptions = {}
 ) {
   return {
     name: 'snowpack-svgr',
@@ -47,8 +48,6 @@ function snowpackSvgr(
       let publicPath = '';
 
       for (const [start, { url }] of Object.entries(snowpackConfig.mount)) {
-        console.log({ filePath, start, url });
-
         if (filePath.startsWith(start)) {
           publicPath = filePath.replace(start, url);
         }
@@ -77,15 +76,17 @@ function snowpackSvgr(
 
       const config = babel.loadPartialConfig({
         filename: filePath,
+        ...defaultBabelOptions,
         ...babelOptions,
-        // ...pluginOptions.babelOptions,
       });
       const transformOptions = config?.options;
-      let { code: result = '' } =
-        (await babel.transformAsync(code, transformOptions)) || {};
+
+      const transform = await babel.transformAsync(code, transformOptions);
+
+      let result = transform?.code ?? '';
 
       if (exportUrlAsDefault) {
-        result = result!.replace(
+        result = result.replace(
           /export default (.+);/,
           `export default "${publicPath}${fileExt}"; export { $1 as ReactComponent };`
         );
