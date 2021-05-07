@@ -41,7 +41,7 @@ function SvgTest(props, svgRef) {
 }
 
 var ForwardRef = /*#__PURE__*/React.forwardRef(SvgTest);
-export default \\"/test.svg.svg\\"; export { ForwardRef as ReactComponent };"
+export default \\"/dist/__fixtures__/test.svg.svg\\"; export { ForwardRef as ReactComponent };"
 `;
 
 exports[`snowpack-svgr should compile .svg files 1`] = `

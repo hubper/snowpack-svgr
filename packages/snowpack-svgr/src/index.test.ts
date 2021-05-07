@@ -5,8 +5,7 @@ import { PluginLoadOptions } from 'snowpack';
 describe('snowpack-svgr', () => {
   const snowpackConfig: any = {
     mount: {
-      public: { url: '/', static: true },
-      src: { url: '/dist' },
+      [__dirname]: { url: '/dist' },
     },
     buildOptions: {
       out: 'build',

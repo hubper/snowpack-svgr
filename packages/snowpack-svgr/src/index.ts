@@ -47,6 +47,8 @@ function snowpackSvgr(
       let publicPath = '';
 
       for (const [start, { url }] of Object.entries(snowpackConfig.mount)) {
+        console.log({ filePath, start, url });
+
         if (filePath.startsWith(start)) {
           publicPath = filePath.replace(start, url);
         }
