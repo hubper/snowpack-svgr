@@ -1,25 +1,9 @@
 {
-  "name": "snowpack-svgr",
-  "author": "Koen Poelhekke",
-  "version": "0.1.1",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
+  "private": true,
+  "workspaces": [
+    "packages/snowpack-svgr",
+    "packages/example"
   ],
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build --target node --format cjs",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "yarn build"
-  },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -31,13 +15,13 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
+  "scripts": {
+    "start": "yarn workspace snowpack-svgr run start",
+    "build": "yarn workspace snowpack-svgr run build",
+    "test": "yarn workspace snowpack-svgr run test",
+    "lint": "yarn workspace snowpack-svgr run lint"
+  },
   "devDependencies": {
-    "@rollup/plugin-url": "^6.0.0",
-    "@svgr/rollup": "^5.5.0",
-    "husky": "^6.0.0",
-    "rollup": "^2.47.0",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "prettier": "^2.2.1"
   }
 }
