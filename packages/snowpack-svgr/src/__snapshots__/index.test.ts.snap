@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snowpack-svgr should be able to handle large svg files 1`] = `
-Object {
-  ".js": "import React from 'react';
+"import React from 'react';
 
 var _path, _path2, _path3, _path4, _path5, _path6, _path7, _path8, _path9, _path10;
 
@@ -39,12 +38,11 @@ function SvgLarge(props, svgRef) {
 }
 
 var ForwardRef = /*#__PURE__*/React.forwardRef(SvgLarge);
-var large = \\"56a44104e55f1ffd.svg\\";
+var large = \\"/large.svg.svg\\";
 
 export default large;
 export { ForwardRef as ReactComponent };
-",
-}
+"
 `;
 
 exports[`snowpack-svgr should be able to use the rollup url plugin 1`] = `
@@ -99,7 +97,7 @@ export { ForwardRef as ReactComponent };
 
 exports[`snowpack-svgr should compile .svg files 1`] = `
 Object {
-  ".js": "import React from 'react';
+  "[.js]": "import React from 'react';
 
 var _path, _rect, _rect2, _rect3;
 

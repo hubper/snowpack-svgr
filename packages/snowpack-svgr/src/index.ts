@@ -27,7 +27,7 @@ function snowpackSvgr(
       input: ['.svg'],
       output: ['.js', '.svg'],
     },
-    async load({ filePath, fileExt }: PluginLoadOptions) {
+    async load({ filePath }: PluginLoadOptions) {
       let plugins: Plugin[] = [
         svgr({
           svgo: true,
@@ -82,7 +82,7 @@ function snowpackSvgr(
 
         return {
           '.js': result,
-          [fileExt]: await fs.readFile(filePath),
+          '.svg': await fs.readFile(filePath),
         };
       }
 
