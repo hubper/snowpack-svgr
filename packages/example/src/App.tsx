@@ -1,6 +1,6 @@
 import React from 'react';
-import logo, { ReactComponent as Logo } from './logo.svg';
-import large from './large.svg';
+import logo, { ReactComponent as Logo } from './svg/logo.svg';
+import large from './svg/large.svg';
 
 function App() {
   // Return the App component.

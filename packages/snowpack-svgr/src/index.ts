@@ -1,5 +1,4 @@
 import { promises as fs } from 'fs';
-import { basename } from 'path';
 // @ts-expect-error
 import svgr from '@svgr/rollup';
 // @ts-expect-error
@@ -45,12 +44,11 @@ function snowpackSvgr(
       output: ['.js', '.svg'],
     },
     async load({ filePath, fileExt }: PluginLoadOptions) {
-      const fileName = basename(filePath);
       let publicPath = '';
 
       for (const [start, { url }] of Object.entries(snowpackConfig.mount)) {
         if (filePath.startsWith(start)) {
-          publicPath = url;
+          publicPath = filePath.replace(start, url);
         }
       }
 
@@ -87,7 +85,7 @@ function snowpackSvgr(
       if (exportUrlAsDefault) {
         result = result!.replace(
           /export default (.+);/,
-          `export default "${publicPath}/${fileName}${fileExt}"; export { $1 as ReactComponent };`
+          `export default "${publicPath}${fileExt}"; export { $1 as ReactComponent };`
         );
 
         return {
