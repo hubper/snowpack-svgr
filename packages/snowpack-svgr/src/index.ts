@@ -72,6 +72,14 @@ function snowpackSvgr(
       );
 
       if (rollupUrlPlugin) {
+        const isBase64 = result.includes('data:image/svg+xml');
+
+        if (isBase64) {
+          return {
+            '.js': result,
+          };
+        }
+
         return {
           '.js': result,
           [fileExt]: await fs.readFile(filePath),

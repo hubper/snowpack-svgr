@@ -7606,13 +7606,6 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack-plugin-url-loader@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/snowpack-plugin-url-loader/-/snowpack-plugin-url-loader-1.0.0.tgz#72e44ca7b2c28dda7a9f0668c8cb0dba5effb854"
-  integrity sha512-aX3FVgj0pnXJzJuDoflarFSMvq4kUrJtqpvbJm1tkP4iYRFKsKWg8jfz2A8dn6qec38uHd5/KyUNbXDjlE2i0A==
-  dependencies:
-    mime "^2.4.6"
-
 snowpack@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-3.3.7.tgz#4ac0cb2615fadb6eabc137225a4362563af7354c"
