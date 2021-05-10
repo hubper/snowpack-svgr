@@ -26,6 +26,7 @@ yarn add -D snowpack-svgr
 }
 ```
 
+### Options
 ```ts
 type SnowpackSVGROptions = {
     /**
