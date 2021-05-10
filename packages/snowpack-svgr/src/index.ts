@@ -79,8 +79,6 @@ function snowpackSvgr(
           console.error(`No image found for ${filePath}`);
         }
 
-        console.log({ fileUrl });
-
         result = result.replace(
           /export default (.+);/,
           `export default "${fileUrl.replace(
