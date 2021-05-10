@@ -35,11 +35,10 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 import React from \\"react\\";
 
-function SvgTest(props, svgRef) {
+function SvgTest(props) {
   return /*#__PURE__*/React.createElement(\\"svg\\", _extends({
     xmlns: \\"http://www.w3.org/2000/svg\\",
-    viewBox: \\"0 0 841.9 595.3\\",
-    ref: svgRef
+    viewBox: \\"0 0 841.9 595.3\\"
   }, props), _g || (_g = /*#__PURE__*/React.createElement(\\"g\\", {
     fill: \\"#61DAFB\\"
   }, /*#__PURE__*/React.createElement(\\"path\\", {
@@ -51,7 +50,6 @@ function SvgTest(props, svgRef) {
   }))));
 }
 
-var ForwardRef = /*#__PURE__*/React.forwardRef(SvgTest);
-export default ForwardRef;",
+export default SvgTest;",
 }
 `;

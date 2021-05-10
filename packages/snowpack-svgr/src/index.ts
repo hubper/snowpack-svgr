@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { PluginLoadOptions, SnowpackConfig } from 'snowpack';
+import { getUrlForFile, PluginLoadOptions, SnowpackConfig } from 'snowpack';
 // @ts-expect-error
 import convert from '@svgr/core';
 // @ts-expect-error
@@ -34,15 +34,7 @@ function snowpackSvgr(
       input: ['.svg'],
       output: ['.js', '.svg'],
     },
-    async load({ filePath, fileExt }: PluginLoadOptions) {
-      let publicPath = '';
-
-      for (const [start, { url }] of Object.entries(snowpackConfig.mount)) {
-        if (filePath.startsWith(start)) {
-          publicPath = filePath.replace(start, url);
-        }
-      }
-
+    async load({ filePath }: PluginLoadOptions) {
       const contents = await fs.readFile(filePath, 'utf-8');
       const code = (
         await convert(
@@ -81,9 +73,20 @@ function snowpackSvgr(
       let result = transform?.code ?? '';
 
       if (exportUrlAsDefault) {
+        const fileUrl = getUrlForFile(filePath, snowpackConfig) ?? '';
+
+        if (!fileUrl) {
+          console.error(`No image found for ${filePath}`);
+        }
+
+        console.log({ fileUrl });
+
         result = result.replace(
           /export default (.+);/,
-          `export default "${publicPath}${fileExt}"; export { $1 as ReactComponent };`
+          `export default "${fileUrl.replace(
+            '.js',
+            '.svg'
+          )}"; export { $1 as ReactComponent };`
         );
 
         return {
