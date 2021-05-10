@@ -12,10 +12,13 @@ describe('snowpack-svgr', () => {
     },
   };
 
-  it('should compile .svg files', async () => {
-    const filePath = join(__dirname, '__fixtures__/test.svg');
+  const filePath = join(__dirname, '__fixtures__/test.svg');
+  const svgrOptions = {
+    ref: true,
+  };
 
-    const plugin = snowpackSvgr(snowpackConfig);
+  it('should compile .svg files', async () => {
+    const plugin = snowpackSvgr(snowpackConfig, { svgrOptions });
     const result = await plugin.load({
       filePath,
       fileExt: '.svg',
@@ -25,9 +28,10 @@ describe('snowpack-svgr', () => {
   });
 
   it('should be to export the url as default export', async () => {
-    const filePath = join(__dirname, '__fixtures__/test.svg');
-
-    const plugin = snowpackSvgr(snowpackConfig, { exportUrlAsDefault: true });
+    const plugin = snowpackSvgr(snowpackConfig, {
+      exportUrlAsDefault: true,
+      svgrOptions,
+    });
     const result = await plugin.load({
       filePath,
       fileExt: '.svg',

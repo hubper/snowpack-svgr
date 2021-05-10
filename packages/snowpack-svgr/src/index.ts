@@ -14,16 +14,6 @@ import presetEnv from '@babel/preset-env';
 // @ts-expect-error
 import pluginTransformReactConstantElements from '@babel/plugin-transform-react-constant-elements';
 
-const defaultBabelOptions = {
-  babelrc: false,
-  configFile: false,
-  presets: [
-    babel.createConfigItem(presetReact, { type: 'preset' }),
-    babel.createConfigItem([presetEnv, { modules: false }], { type: 'preset' }),
-  ],
-  plugins: [babel.createConfigItem(pluginTransformReactConstantElements)],
-};
-
 type SnowpackSVGROptions = {
   exportUrlAsDefault?: boolean;
   svgrOptions?: Record<string, unknown>;
@@ -59,7 +49,6 @@ function snowpackSvgr(
           contents,
           {
             svgo: true,
-            ref: true,
             ...svgrOptions,
           },
           {
@@ -70,13 +59,19 @@ function snowpackSvgr(
             filePath,
           }
         )
-      )
-        // Snowpack doesn't like these imports for React
-        .replace('import * as React', 'import React');
+      ).replace('import * as React', 'import React');
 
       const config = babel.loadPartialConfig({
         filename: filePath,
-        ...defaultBabelOptions,
+        babelrc: false,
+        configFile: false,
+        presets: [
+          babel.createConfigItem(presetReact, { type: 'preset' }),
+          babel.createConfigItem([presetEnv, { modules: false }], {
+            type: 'preset',
+          }),
+        ],
+        plugins: [babel.createConfigItem(pluginTransformReactConstantElements)],
         ...babelOptions,
       });
       const transformOptions = config?.options;
