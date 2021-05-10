@@ -76,7 +76,7 @@ function snowpackSvgr(
         const fileUrl = getUrlForFile(filePath, snowpackConfig) ?? '';
 
         if (!fileUrl) {
-          console.error(`No image found for ${filePath}`);
+          console.error(`No url found for ${filePath}`);
         }
 
         result = result.replace(
