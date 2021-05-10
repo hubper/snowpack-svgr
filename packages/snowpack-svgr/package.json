@@ -1,16 +1,15 @@
 {
   "name": "snowpack-svgr",
-  "author": "Koen Poelhekke <info@dotred.nl>",
+  "author": "Koen Poelhekke <koen@hubper.co>",
   "version": "0.3.2",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "homepage": "https://github.com/kpoelhekke/snowpack-svgr",
-  "repository": "github:kpoelhekke/snowpack-svgr",
-  "bugs": "https://github.com/kpoelhekke/snowpack-svgr/issues",
+  "homepage": "https://github.com/hubper/snowpack-svgr#readme",
+  "repository": "github:hubper/snowpack-svgr",
+  "bugs": "https://github.com/hubper/snowpack-svgr/issues",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=12"
