@@ -18,11 +18,11 @@
 yarn add -D snowpack-svgr
 ```
 
-```json
+```js
 // snowpack.config.json
 
 {
-    "plugins": [["snowpack-svgr", { /* SnowpackSVGROptions */ }]
+    plugins: [["snowpack-svgr", { /** SnowpackSVGROptions */ }]
 }
 ```
 
@@ -31,20 +31,17 @@ type SnowpackSVGROptions = {
     /**
      * If true the default export will be the url of the asset.
      * The ReactComponent will be exported via the ReactComponent named export
-     * @default false
      */
-    exportUrlAsDefault?: boolean;
+    exportUrlAsDefault?: boolean; // false
     /**
      * Options used by @svgr/core
-     * @default {}
      * @see See: https://react-svgr.com/docs/options/
      */
-    svgrOptions?: Record<string, unknown>;
+    svgrOptions?: Record<string, unknown>; // {}
     /**
-     * Options used by babell.loadPartialConfig()
-     * @default {}
+     * Options used by babel.loadPartialConfig()
      */
-    babelOptions?: babel.TransformOptions;
+    babelOptions?: babel.TransformOptions; // {}
 }
 ```
 
