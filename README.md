@@ -12,6 +12,13 @@
   </a>
 </p>
 
+`snowpack-svgr` will make sure you can use your SVG files as ReactComponents just like you were used to with `create-react-app` but with all the benefits of Snowpack.
+
+- [x] Supports both url and as ReactComponent imports
+- [x] Allows custom SVGR and Babel configuration
+- [x] Works in a monorepo setup
+- [x] Covered by unit tests
+
 ## Install
 
 ```sh

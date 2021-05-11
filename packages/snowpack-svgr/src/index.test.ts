@@ -22,7 +22,7 @@ describe('snowpack-svgr', () => {
       fileExt: '.svg',
     } as PluginLoadOptions);
 
-    expect(result).toMatchSnapshot();
+    expect(result['.js']).toMatchSnapshot();
   });
 
   it('should be to export the url as default export', async () => {

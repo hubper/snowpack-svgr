@@ -3,13 +3,13 @@ import logo, { ReactComponent as Logo } from './svg/logo.svg';
 
 function App() {
   return (
-    <>
-      <h2>ReactComponent</h2>
+    <div style={{ maxWidth: 600 }}>
+      <code>{`import { ReactComponent as Logo } from "./svg/logo.svg"`}</code>
       <Logo />
 
-      <h2>Inline url</h2>
+      <code>{`import logo from "./svg/logo.svg"`}</code>
       <img src={logo} alt="" />
-    </>
+    </div>
   );
 }
 

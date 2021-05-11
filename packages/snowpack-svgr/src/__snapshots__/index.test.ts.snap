@@ -28,8 +28,7 @@ export default \\"/dist/__fixtures__/test.svg.svg\\"; export { ForwardRef as Rea
 `;
 
 exports[`snowpack-svgr should compile .svg files 1`] = `
-Object {
-  ".js": "var _g;
+"var _g;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -50,6 +49,5 @@ function SvgTest(props) {
   }))));
 }
 
-export default SvgTest;",
-}
+export default SvgTest;"
 `;
