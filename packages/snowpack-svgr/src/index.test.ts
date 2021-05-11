@@ -2,6 +2,15 @@ import { join } from 'path';
 import snowpackSvgr from './index';
 import { createConfiguration, PluginLoadOptions } from 'snowpack';
 
+jest.mock('snowpack-svgr', () => () => ({
+  name: 'snowpack-svgr',
+  resolve: {
+    input: ['.svg'],
+    output: ['.js', '.svg'],
+  },
+  load: jest.fn(),
+}));
+
 describe('snowpack-svgr', () => {
   const filePath = join(__dirname, '__fixtures__/test.svg');
   const svgrOptions = {
