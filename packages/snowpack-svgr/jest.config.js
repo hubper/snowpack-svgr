@@ -1,5 +1,3 @@
 module.exports = {
-  moduleNameMapper: {
-    '^snowpack-svgr$': '<rootDir>/src',
-  },
+  moduleDirectories: ['node_modules', 'src'],
 };
