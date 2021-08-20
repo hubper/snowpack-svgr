@@ -1,4 +1,6 @@
 import { promises as fs } from 'fs';
+import * as path from 'path';
+import * as mime from 'mime';
 import { getUrlForFile, PluginLoadOptions, SnowpackConfig } from 'snowpack';
 // @ts-expect-error
 import convert from '@svgr/core';
@@ -13,6 +15,21 @@ import presetReact from '@babel/preset-react';
 import presetEnv from '@babel/preset-env';
 // @ts-expect-error
 import pluginTransformReactConstantElements from '@babel/plugin-transform-react-constant-elements';
+
+async function encode(file: string, name: string) {
+  const encoding = 'binary';
+  if (path.isAbsolute(file)) {
+    file = await fs.readFile(file, encoding);
+  }
+
+  if (file.length > 10240) {
+    return;
+  }
+
+  const mimetype = mime.getType(name);
+  const buffer = Buffer.from(file, encoding);
+  return `data:${mimetype || ''};base64,${buffer.toString('base64')}`;
+}
 
 type SnowpackSVGROptions = {
   exportUrlAsDefault?: boolean;
@@ -73,18 +90,22 @@ function snowpackSvgr(
       let result = transform?.code ?? '';
 
       if (exportUrlAsDefault) {
-        const fileUrl = getUrlForFile(filePath, snowpackConfig) ?? '';
+        const encodedUrl = await encode(filePath, filePath);
 
-        if (!fileUrl) {
+        const uri = encodedUrl
+          ? encodedUrl
+          : (getUrlForFile(filePath, snowpackConfig) ?? '').replace(
+              '.js',
+              '.svg'
+            );
+
+        if (!uri) {
           console.error(`No url found for ${filePath}`);
         }
 
         result = result.replace(
           /export default (.+);/,
-          `export default "${fileUrl.replace(
-            '.js',
-            '.svg'
-          )}"; export { $1 as ReactComponent };`
+          `export default "${uri}"; export { $1 as ReactComponent };`
         );
 
         return {
